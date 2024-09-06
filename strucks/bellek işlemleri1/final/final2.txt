@@ -1,0 +1,2 @@
+bu dosya final içiv
+main.c

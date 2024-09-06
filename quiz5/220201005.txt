@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+//zeynep tandogan 220201005
+
+int karakterAra(char *cumle) {
+    int i;
+    for (i = 0; i < strlen(cumle); i++) {
+        if (cumle[i] == '\"') {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void alintiBul(char *cumle) {
+    int baslangic = karakterAra(cumle);
+    int bitis = karakterAra(cumle + baslangic + 1) + baslangic + 1;
+    printf("Alinti cumlesi: ");
+    for (int i = baslangic + 1; i < bitis; i++) {
+printf("%c", cumle[i]);
+    }
+    printf("\nalinti cümlesinde polindrom kelimeler:");
+    palindromBul(cumle, baslangic + 1, bitis - 1);
+
+}
+
+void palindromBul(char *cumle, int baslangic, int bitis) {
+    int i, j;
+    char kelime[100];
+    for (i = baslangic; i <= bitis; i++) {
+        if (cumle[i] == '\"') {
+            i++;
+            while (cumle[i] != '\"') {
+                j = 0;
+                while (isalpha(cumle[i])) {
+                        kelime[j] = cumle[i];
+                    j++;
+                    i++;
+                }
+                kelime[j] = '\0';
+                if (strlen(kelime) > 1 && palindromMu(kelime)) {
+                    puts(kelime);
+                }
+                else (printf("cümlede polindrom yok."))
+                i++;
+            }
+        }
+    }
+}
+
+int palindromMu(char *kelime) {
+    int i, j;
+    for (i = 0, j = strlen(kelime) - 1; i < j; i++, j--) {
+        if (kelime[i] != kelime[j]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int main() {
+    char cumle[1000];
+    printf("Lutfen bir cumle giriniz: ");
+    fgets(cumle, sizeof(cumle), stdin);
+    if (karakterAra(cumle)==-1)
+        printf("cumlede alinti yok");
+        else alintiBul(cumle);
+    return 0;
+}

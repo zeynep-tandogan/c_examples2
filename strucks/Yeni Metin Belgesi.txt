@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+ struct kimlik {
+ char isim[20];
+ int gun;
+ int ay;
+ int yil;
+
+ };
+  struct kimlik kucugubul(int n,struct kimlik *bilgiler[n])
+  {
+
+    struct kimlik temp=*bilgiler[0];
+    if(n!=1)
+    {
+        for(int i=0; i<n; i++)
+        {
+            if(bilgiler[i]->yil>bilgiler[0]->yil)
+                temp=*bilgiler[i];
+            else if(bilgiler[i]->yil==bilgiler[0]->yil)
+            {
+                if(bilgiler[i]->ay>bilgiler[0]->ay)
+                    temp=*bilgiler[i];
+                else if(bilgiler[i]->ay==bilgiler[0]->ay)
+                {
+                    if(bilgiler[i]->gun>bilgiler[0]->gun)
+                        temp=*bilgiler[i];
+
+                }
+
+            }
+        }
+    }
+    return temp;
+
+
+  };
+
+
+
+int main()
+{
+    int n;
+    printf("kisi sayisini girniz:");
+    scanf("%d",&n);
+    struct kimlik bilgiler[n];
+    for(int i=0;i<n;i++)
+    {
+        printf("%d. kisinin ismini giriniz:",i+1);
+        /*fgets(bilgiler[i].isim,20,stdin);
+        bilgiler[i].isim[strcspn(bilgiler[i].isim, "\n")] = '\0';*/
+        scanf("%s",&bilgiler[i].isim);
+        printf("\n%d. kisinin idogum tarihini giriniz:",i+1);
+        printf("\ngun: ");
+        scanf("%d",&bilgiler[i].gun);
+        printf("ay: ");
+        scanf("%d",&bilgiler[i].ay);
+        printf("yil: ");
+        scanf("%d",&bilgiler[i].yil);
+    }
+    printf("\n\tkisi bilgileri\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n ");
+    for(int i=0;i<n;i++)
+    {
+       printf("\n%s - %d/%d/%d",bilgiler[i].isim,bilgiler[i].gun,bilgiler[i].ay,bilgiler[i].yil);
+    }
+    printf("\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n");
+    struct kimlik temp=kucugubul(n,bilgiler);
+    printf("en kucuk kisinin ismi: %s",temp.isim);
+    printf("\nen kucuk kisinin dogum tarihi: %d/%d/%d",temp.gun,temp.ay,temp.yil);
+
+    return 0;
+}

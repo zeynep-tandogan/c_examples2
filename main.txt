@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <stdlib.h>
+//210201019 ZEYNEP DURAK
+
+int satirhesapla(int *ptr)
+{
+    int i=0,toplam=0,j=0,d[2];
+    for(;i<*ptr;i++)
+    {
+        toplam=toplam+i;
+        j++;
+        *ptr=&d[0];
+        j=&d[1];
+    }
+    if(*ptr==toplam)
+
+    {
+        return j;
+
+
+    }
+}
+int kontrol(int *ptr)
+{
+    int i=1,toplam=0,j=0,d[2];
+    for(;i<*ptr<toplam;i++)
+    {
+        toplam=toplam+i;
+        j++;
+
+    }
+    if(*ptr==toplam)
+
+        return 1;
+    else
+        return 0;
+}
+
+void ucgencizdir(int *ptr)
+{
+
+
+        int i=0,j=0;
+
+        for(i=1;i<=ptr;i++)
+        {
+        for(j=1;j<=ptr-i;j++)
+            printf(" ");
+        for (j=1;j<=2*i-1;j++){
+            printf("*");
+        }
+        printf("\n");
+        }
+
+
+
+}
+int main()
+{
+    int T,a;
+    char ch=' ';
+    int dizi[2]={T,a};
+
+
+        printf("Lutfen bir T degeri giriniz:\n");
+            scanf("%d",&T);
+            dizi[0]=T;
+            dizi[1]=satirhesapla(&T);
+            printf("satir sayisi %d dir:\n",dizi[1]);
+
+            if(kontrol(&T)==1)
+            {
+                printf("T pascal ucgeni için uygundur.\n");
+                dizi[1]=satirhesapla(dizi[0]);
+                ucgencizdir(dizi[1]);
+            }
+            else
+            printf("T uygun sayi degildir.\n");
+
+    while(1)
+    {
+        char ch;
+        printf("Devam etmek icin E, cikis icin H giriniz:");
+        fflush(stdin);
+        scanf("%c",&ch);
+        switch(ch)
+        {
+            case 'E':
+            {
+                printf("T degeri giriniz:");
+                scanf("%d",&T);
+                dizi[0]=T;
+                if(kontrol(dizi[0])==1)
+                    {
+
+                        dizi[1]=satirhesapla(dizi[0]);
+                        ucgencizdir(dizi[1]);
+                    }
+                else
+                    printf("Girilen deger pascal ucgenine uygun degil.\n");
+            }
+            case 'H':
+                break;
+
+        }
+    }
+
+
+    return 0;
+}
